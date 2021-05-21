@@ -4,11 +4,13 @@ const path = require('path');
 const port = 8000;
 //npm install express-ejs-layouts     to install for layout
 const expressLayouts = require('express-ejs-layouts');
+
+
+// rendering database file
+const db = require('./config/mongoose');
+
 //adding static files
 app.use(express.static('./assets'));
-
-
-
 
 app.use(expressLayouts);
 //extract style ans scripts from sub pages in to layout
@@ -17,7 +19,7 @@ app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
 //use express router
-app.use('/',require('./routes/r_index'));
+app.use('/',require('./routes'));
 
 //set up the view engine
 app.set('view engine','ejs');
