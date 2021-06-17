@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
 
-
-
-
-
 const postSchema = new mongoose.Schema({
     content:{
         type:String,
         required:true
       },
     user:{
-        type:mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref:'user'
          }
     },{
@@ -18,5 +14,5 @@ const postSchema = new mongoose.Schema({
     
 });
 
-const post = mongoose.mpdel('post',postSchema);
+const post = mongoose.model('post',postSchema);
 module.exports =post;

@@ -6,8 +6,8 @@ const homeController = require('../controllers/home_controller');
 console.log('router loded');
 
 router.get('/',homeController.home);
-router.get('/users',require('./users'));
-
+router.use('/users',require('./users'));
+router.use('/posts', require('./posts'));
 
 // for any futher router acces from here
 //router.use('/routername',require('./routerfile'))
