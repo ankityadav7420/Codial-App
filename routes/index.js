@@ -8,6 +8,7 @@ console.log('router loded');
 router.get('/',homeController.home);
 router.use('/users',require('./users'));
 router.use('/posts', require('./posts'));
+router.use('/comments', require('./comments'));
 
 // for any futher router acces from here
 //router.use('/routername',require('./routerfile'))
