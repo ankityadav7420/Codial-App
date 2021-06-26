@@ -86,8 +86,8 @@ module.exports.create = function(req, res){
 
 
 //sign in and create a session using nomal coe
-//git checkout -b manual-local-auth    first change the branch
 
+//git checkout -b manual-local-auth    first change the branch
 // module.exports.createSession = function(req , res){
 //     //steps to authentication
 //     //find the user
@@ -112,15 +112,20 @@ module.exports.create = function(req, res){
 //         });   
 // }
 
-//  //sign in and create s session for user using passport
-module.exports.createSession= function(req,res){
-    return res.redirect('/');
-    //return res.redirect('/users/profile');
 
+
+//  //sign in and create s session for user using passport
+
+// sign in and create a session for the user
+module.exports.createSession = function(req, res){
+    req.flash('success', 'Logged in Successfully');
+    return res.redirect('/');
 }
 
-//logout part
 module.exports.destroySession = function(req, res){
     req.logout();
+    req.flash('success', 'Logged out successfully');
+
+
     return res.redirect('/');
 }
