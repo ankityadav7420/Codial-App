@@ -35,6 +35,9 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 //adding static files
 app.use(express.static('./assets'));
+//conecting uploades path availbe
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
 app.use(expressLayouts);
 //extract style ans scripts from sub pages in to layout
 app.set('layout extractStyles',true);
