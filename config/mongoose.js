@@ -1,9 +1,10 @@
 // sudo npm install mongoose
 
 const mongoose = require('mongoose');
+const env = require('./environment');
 
 // connecting data base
-mongoose.connect('mongodb://localhost/codial_development');
+mongoose.connect(`mongodb://localhost/${env.db}`);
 const db = mongoose.connection;
 // erroe handelling durning connectimh databse 
 db.on('error',console.error.bind(console,'Error in connecting to mongodb'));

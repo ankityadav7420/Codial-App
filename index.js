@@ -1,4 +1,5 @@
 const express =  require('express');
+const env= require('./config/environment');  // setting development envirnment
 //creating cookies
  //install package  $sudo npm install cookie-parser
 const cookieParser = require('cookie-parser');
@@ -23,21 +24,29 @@ const sassMiddleware =require('node-sass-middleware');
 //connecting flash
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
+//connecting socket.io for chatting engine and setting chat server
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('chat server is listening on port : 5000');
+// const path = require('path');
 
-
-
+if(env.name=='develoment'){
 app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
+    src:path.join(__dirname,env.asset_path,'scss'),
+    dest:path.join(__dirname,env.asset_path,'css'),
+    // src: './assets/scss',
+    // dest: './assets/css',
     debug: true,
     outputStyle: 'extended',
     prefix: '/css'
 }));
+}
 //parse for decoding the form-info
 app.use(express.urlencoded());
 app.use(cookieParser());
 //adding static files
-app.use(express.static('./assets'));
+app.use(express.static(env.asset_path));
 //conecting uploades path availbe
 app.use('/uploads',express.static(__dirname + '/uploads'));
 
@@ -55,7 +64,7 @@ app.set('views','./views');
 app.use(session({
     name: 'codeial',
     // TODO change the secret before deployment in production mode
-    secret: 'blahsomething',
+    secret: 'env.session_cookie_key',
     saveUninitialized: false,
     resave: false,
     cookie: {
