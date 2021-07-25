@@ -1,9 +1,14 @@
 const express =  require('express');
 const env= require('./config/environment');  // setting development envirnment
+//connecting morgan   $sudo npm install morgan
+const logger = require('morgan');
+
 //creating cookies
  //install package  $sudo npm install cookie-parser
 const cookieParser = require('cookie-parser');
 const app =  express();
+//connecting helper
+require('./config/view-helpers')(app);
 const path = require('path');
 const port = 8000;
 //npm install express-ejs-layouts     to install for layout
@@ -49,6 +54,9 @@ app.use(cookieParser());
 app.use(express.static(env.asset_path));
 //conecting uploades path availbe
 app.use('/uploads',express.static(__dirname + '/uploads'));
+//envirement connection logger> morgan
+app.use(logger(env.morgan.mode, env.morgan.options));
+
 
 app.use(expressLayouts);
 //extract style ans scripts from sub pages in to layout
