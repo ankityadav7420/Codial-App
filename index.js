@@ -48,7 +48,7 @@ app.use(sassMiddleware({
 }));
 }
 //parse for decoding the form-info
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 //adding static files
 app.use(express.static(env.asset_path));
